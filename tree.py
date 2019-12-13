@@ -19,8 +19,9 @@ def print_dir(dir_name, dir_path, indent_level):
     # print("debug: ", paths)
     for path in paths:
         # print("debug: ", path)
-        if os.path.isdir(path):
-            print_dir(path, path, indent_level + 1)
+        real_path = dir_path + '/' + path
+        if os.path.isdir(real_path):
+            print_dir(path, real_path, indent_level + 1)
         else:
             # TODO: os.path.isfile would be better to filter out devices
             print_dir_name(path, indent_level + 1)
