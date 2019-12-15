@@ -13,10 +13,13 @@ If you need to (re-install dependencies):
 
 # Usage
 Currently only executed as direct python script.
-`python tree.py`
+`python app.py`
 
 You can configure the level of depth of course.
-`python tree.py --L=3`
+`python app.py --L=3`
 
 Ask for help:
-`python tree.py -h`
+`python app.py -h`
+
+Run the tests:
+`python -m unittest -v test_tree`
