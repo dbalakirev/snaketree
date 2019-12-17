@@ -9,7 +9,7 @@ def format_path_entry(path_name, indent_level):
 
 def process_files(dir_name, dir_path, indent_level, maximum_depth):
     if indent_level >= maximum_depth:
-        return
+        return (0,0)
     dir_path_entry = format_path_entry(bold(dir_name), indent_level)
     print(dir_path_entry)
     paths = os.listdir(dir_path)

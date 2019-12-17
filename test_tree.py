@@ -14,5 +14,10 @@ class TestTreeModule(unittest.TestCase):
         result = tree.format_path_entry(path_name, 2)
         self.assertEqual(expected, result)
 
+    def test_process_files_respects_depth(self):
+        expected = (0,0)
+        result = tree.process_files("","", indent_level = 2, maximum_depth = 2)
+        self.assertEqual(expected, result)
+
 if __name__ == '__main__':
     unittest.main()
