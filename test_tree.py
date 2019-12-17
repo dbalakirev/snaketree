@@ -8,5 +8,11 @@ class TestTreeModule(unittest.TestCase):
         result = tree.bold("hello")
         self.assertEqual(expected, result)
 
+    def test_format_file_entry(self):
+        path_name = "test_tree.cpython-38.pyc"
+        expected = "-- test_tree.cpython-38.pyc 2"
+        result = tree.format_path_entry(path_name, 2)
+        self.assertEqual(expected, result)
+
 if __name__ == '__main__':
     unittest.main()
