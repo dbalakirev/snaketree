@@ -9,6 +9,7 @@ def main():
     source_path = '.'
     maximum_depth = args.L
     depth = 0
-    tree.process_files(source_path, source_path, depth, maximum_depth)
+    found_paths = tree.process_files(source_path, source_path, depth, maximum_depth)
+    print("{} directories, {} files".format(found_paths[0], found_paths[1]))
 
 main()
