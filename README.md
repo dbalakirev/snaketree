@@ -16,7 +16,10 @@ Currently only executed as direct python script.
 `python app.py`
 
 You can configure the level of depth of course.
-`python app.py --L=3`
+`python app.py -L 3`
+
+You can configure the directory to be discovered.
+`python app.py -d /tmp`
 
 Ask for help:
 `python app.py -h`
