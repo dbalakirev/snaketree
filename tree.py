@@ -8,28 +8,19 @@ def format_path_entry(path_name, indent_level):
     return "{} {} {}".format(divider, path_name, indent_level)
 
 def process_files(dir_name, dir_path, indent_level, maximum_depth):
+    found_tree = {}
     if indent_level >= maximum_depth:
-        return (0, 0)
-
-    # We found 'ourself'
-    found_directories = 0
-    found_files = 0
+        return found_tree
 
     paths = os.listdir(dir_path)
     for path in paths:
         next_level = indent_level + 1
-
-        path_entry = format_path_entry(path, next_level)
-        print(path_entry)
-
         real_path = dir_path + '/' + path
-
         if os.path.isdir(real_path):
-            found_directories += 1
-            sub_results = process_files(path, real_path, next_level, maximum_depth)
-            found_directories += sub_results[0]
-            found_files += sub_results[1]
+            sub_tree = process_files(path, real_path, next_level, maximum_depth)
+            found_tree[path] = {}
+            found_tree[path].update(sub_tree)
         else:
-            found_files += 1
             # TODO: os.path.isfile would be better to filter out devices
-    return (found_directories, found_files)
+            found_tree[path] = path
+    return found_tree

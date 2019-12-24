@@ -1,5 +1,6 @@
 import argparse
 import tree
+import json
 
 def main():
     parser = argparse.ArgumentParser(description='Poor man\'s python implementation of the tree command')
@@ -10,7 +11,7 @@ def main():
     source_path = args.directory
     maximum_depth = args.maximum_level
     depth = 0
-    found_paths = tree.process_files(source_path, source_path, depth, maximum_depth)
-    print("{} directories, {} files".format(found_paths[0], found_paths[1]))
+    found_tree = tree.process_files(source_path, source_path, depth, maximum_depth)
+    print(json.dumps(found_tree, indent=1))
 
 main()

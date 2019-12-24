@@ -1,6 +1,7 @@
 import unittest
 import tree
 import tempfile
+from schema import Schema, And, Use, Optional, SchemaError
 
 class TestTreeModule(unittest.TestCase):
 
@@ -16,7 +17,7 @@ class TestTreeModule(unittest.TestCase):
         self.assertEqual(expected, result)
 
     def test_process_files_respects_depth(self):
-        expected = (0,0)
+        expected = {}
         result = tree.process_files("","", indent_level = 2, maximum_depth = 2)
         self.assertEqual(expected, result)
 
@@ -25,12 +26,28 @@ class TestTreeModule(unittest.TestCase):
         sub1 = tempfile.mkdtemp(dir=parent)
         sub2 = tempfile.mkdtemp(dir=parent)
         lowsub1 = tempfile.mkdtemp(dir=sub2)
-        tempfile.mkstemp(dir=sub1)
-        tempfile.mkstemp(dir=sub2)
-        tempfile.mkstemp(dir=lowsub1)
+        tempfile.mkstemp(dir=sub1)[1]
+        tempfile.mkstemp(dir=sub2)[1]
+        tempfile.mkstemp(dir=lowsub1)[1]
         result = tree.process_files(parent, parent, 0, 3)
-        expected = (3,3)
-        self.assertEqual(expected, result)
+        def find_results(result):
+            found_directories = 0
+            found_files = 0
+            for key in result:
+                value = result[key]
+                if (type(value) is dict):
+                    files = find_results(value)
+                    found_directories += files[0]
+                    found_files += files[1]
+                    found_directories += 1
+                else:
+                    found_files += 1
+            return (found_directories, found_files)
+        files = find_results(result)
+        found_directories = files[0]
+        found_files = files[1]
+        self.assertEqual(3, found_directories)
+        self.assertEqual(3, found_files)
 
 if __name__ == '__main__':
     unittest.main()
