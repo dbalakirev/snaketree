@@ -1,7 +1,6 @@
 import unittest
 import tree
 import tempfile
-from schema import Schema, And, Use, Optional, SchemaError
 
 class TestTreeModule(unittest.TestCase):
 
