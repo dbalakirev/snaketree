@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+PROJ_DIR=${1}
+BIN_DIR=~/bin
+TREE_CMD=$BIN_DIR/tree
+mkdir -p $BIN_DIR
+echo "#!/usr/bin/env bash" > $TREE_CMD
+echo "PROJ_DIR=$PROJ_DIR" >> $TREE_CMD
+# First argument of the *created script*
+echo "EXEC_DIR=\${1}" >> $TREE_CMD
+echo "python $PROJ_DIR/app.py -d \$EXEC_DIR" >> $TREE_CMD
