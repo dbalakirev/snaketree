@@ -1,5 +1,6 @@
 import argparse
 import tree
+import tree_parser
 import json
 
 def main():
@@ -12,6 +13,7 @@ def main():
     maximum_depth = args.maximum_level
     depth = 0
     found_tree = tree.process_files(source_path, source_path, depth, maximum_depth)
-    print(json.dumps(found_tree, indent=1))
+    #print(json.dumps(found_tree, indent=1))
+    print(tree_parser.tree_to_string(found_tree))
 
 main()
