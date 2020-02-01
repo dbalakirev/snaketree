@@ -6,7 +6,7 @@ You only have to do this once:
 `python -m venv myvenv`
 
 Then you can install the dependencies:
-`venv/Scripts/activate`.
+`. myvenv/Scripts/activate`.
 
 If you need to (re-install dependencies):
 `pip install -r requirements.txt`
